@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    
+
+    <style>
+#grandpa{
+
+    height : 100px
+}
+#papa{
+
+    height : 70px
+}
+
+#country{
+    height:200px;
+    background-color: blueviolet;
+}
+
+#state{
+    height:120px;
+    background-color:brown
+}
+#district{
+    height:50px;
+    background-color: chartreuse;
+}
+
+    </style>
+</head>
+<body>
+
+<!--Event Bubbling : When an event happens on an element, it first runs the handlers on it(here alert funcn is a handler, which handles the event), then on its parent, 
+then all the way up on other ancestors.-->
+
+    <div id="grandpa" style="background-color:aqua " onclick="alert('grandpa clicked')">
+<!--event same hona chahiye sare element ka(like onclick here is same in each elements)otherwise bubbling will not take place. bubbling occurs on all types of event-->
+        <h>grandpa</h>
+
+        <div id="papa" style="background-color:rgb(0, 255, 38)" onclick="alert('papa clicked')">
+
+            <h>papa</h>
+              <div id="beta" style="background-color:rgb(255, 111, 0)" onclick="alert('beta clicked')">
+                 <h>beta</h>
+                 
+
+              </div>
+
+        </div>
+
+    </div>
+
+    <!--example 2 for event bubbling stop bubbling-->
+<div id="country" onclick="contry()">
+       <h1>country</h1>
+    <div id="state" onclick="staatt()">
+            <h3>state</h3>
+        <div id="district" onclick="dist()">
+            <h6>district</h6>
+        </div>
+
+    </div>
+</div>
+
+
+   
+    <script>
+
+        function  contry(){
+            alert('country')
+        }
+
+        function staatt(){
+            alert('state')//if we add event.stopPropogation here then bubbling will be completely stop .
+        }
+
+        function dist(){
+            alert('district')
+            event.stopPropagation()//if we click on district then  bubbling nahi hoga. lekin agar ham state par click karenge to bubble hoga aur event bubble hoke country vale div me jayega
+        }
+//primitives(P) datatype and non primitive(N.P).primitives are built in and predefined dataypes
+        var a='jai shree ram';//p
+        var b=250//p
+        let c=true;
+         var d;
+         const e=null;
+
+
+        console.log("type of a is " + typeof(a));
+        console.log("type of b is " + typeof(b));
+         console.log("type of c is " + typeof(c));
+console.log("type of d is "+ typeof(d));//The meaning of undefined is ‘value is not assigned’.Undefined data type means a variable that is not defined. The variable is declared but doesn’t contain any value.
+           console.log("type of e is " + typeof(e));//This returns object.This means the type of a null value is an object, not null.
+
+        var arr=[2,4,10,4,20];
+    //document.write(arr+" "+  "array length is ");
+    console.log(arr)
+
+    console.log(arr.length)
+
+    //array methods
+
+    arr.push(100)
+    console.log(arr)
+    arr.pop()
+    console.log(arr)
+//The shift() method removes the first array element and "shifts" all other elements to a lower index.
+    var sft=arr.shift();//The shift() method returns the value that was "shifted out" or deleted . 2 in this case
+    console.log(arr)
+
+    console.log(sft)
+
+    var usft=arr.unshift('vicky')//The unshift() method returns the new array length:
+    console.log(arr)
+    console.log(usft)
+
+
+    //splice[starting index, deleteCount, arguments to replace]
+    //swiss knife => insert, remove, replace
+
+//array.splice(startIndex, deleteCount, arg1,arg2,arg3.........)
+    var arr2=['vicky', 'vishal','abhimanyu', 'swet']
+    console.log(arr2)
+    arr2.splice(2,2,'shubham','utshav')
+    console.log(arr2)
+    arr2.splice(2,0,'chirag')//insert
+    console.log(arr2)
+//arr.splice(0,1)//deletion or remove
+
+    //slice  
+    //let array = ['h','e','l','l','o']
+
+// console.log(array.slice(1,3))//in this case slice will not include the 3rd index
+// console.log(array.slice(-2))
+// console.log(array.slice(1))//in this all the elements starting from 1 to end will be include to slice.
+
+var arra=['apple','mango','nett','sehr', 'bist']
+console.log(arra)
+console.log(arra.slice(1))
+console.log(arra)
+
+//The slice() method creates a new array.
+
+//The slice() method does not remove any elements from the source array.
+    
+
+//Scoping 
+
+ function greeting(){
+
+    let loc=101 
+    console.log("hello"+' '+ a)// a has global scope 
+    console.log("i am inside greeting function"+' '+loc)//loc has local scope.only accesible inside this function.
+ }
+ greeting()
+
+ //console.log(loc)//since it has local scope, wr can't access it outside its function where it has declared. 
+
+
+ {
+    let blk='Sri ram'
+    const blk2='hanumanji'
+    var blk3='Ravan'//Variables declared with the var keyword, do not have block scope
+ }
+ //console.log(blk)//Array.html:95 Uncaught ReferenceError: blk is not defined
+ //console.log(blk2)//Array.html:96 Uncaught ReferenceError: blk2 is not defined
+ console.log(blk3)//ravan will get printed  bcoz var has not block scope
+
+
+ let arra2=[20,30,10,8,26]
+//syntax : array.map(function(currentValue, index, arr), thisValue),function and current value is required,rest arguments aare optional
+    let copied=arra2.map(fun1)
+    console.log(arra2)// map function dos not affect the original array. hence it will print [20,30,10,8,26]
+    console.log(copied);//it generates a new array with some modification.
+    console.log(arra2)// it will print [20,30,10,8,26]. no change in original one
+
+    function fun1(cop, indx){
+
+        return [indx, cop*10];
+//JavaScript doesn't support functions that return multiple values. However, you can wrap multiple values into an array or an object and return the array or the object.
+    
+    }
+
+//objects
+
+let person={
+  //firstName is a property and istakar is its value
+    firstNmae:'istakar',
+    lastName:'husain',
+    age:40,
+    hobbies:['listening music','car driving','talking'],
+//object inside object:inner object ke  properties ko quotation me likhe, in this case i.e obejct inside a object
+    living:{
+               'city':'phagwara',
+               'country':'bharat'
+    },
+    //function inside object
+
+    salary: function sal(){
+         return 2000000;
+//An object method is an object property containing a function definition.
+//An object in JavaScript may also have a function as a member, in which case it will be known as a method of that object. here salary is a method  
+}
+};
+
+console.log(person.salary());
+//console.log(person.living)//printing the object which is inside an another object  
+//console.log(person.living.city)//print city name
+//console.log(person)
+document.write(person.firstNmae+' '+person.lastName+ ' ')
+
+
+person.firstNmae='vicky';//changing the value of a property of object
+document.write(person.firstNmae)
+
+//adding new property to object
+
+person.email='mishravicky0141@gmail.com'
+delete person.lastName;
+//console.log(person)
+//console.log('age' in person)
+
+//array inside an object
+//console.log(person.hobbies)//hobbies[2]:for accessing a particular index 
+
+
+//filter function
+
+
+function filterfun(age){//here age contains the current value,as filterfun is running for each elements of array one by one.
+return age>18;
+}
+let agedata=[40,100,23,16,29,57,21,15,8,6,19]
+let filtered=agedata.filter(filterfun)
+
+console.log(filtered)
+
+//Arrow Function
+
+let fun2s=(a,b)=>a+b;
+
+let var2=fun2s(10,15);
+document.write('  ,'+'sum of a and b='+var2)
+
+//f we have only one argument, then parentheses around parameters can be omitted, making that even shorter.
+
+let  fun2s2=x=>x*2;
+let var3=fun2s2(10)
+document.write(',value of second arrowFun ='+var3)
+
+//If there are no arguments, parentheses are empty, but they must be present:
+let fun2s3=()=> document.write(',I am fun2s3')
+
+fun2s3();
+
+let fun2s4=()=>{
+// if our arrow function has more than one statement then in that case we can use curly braces.
+    console.log('hello vicky');
+    console.log('how are you')
+}
+fun2s4();
+
+/*unnamed or anonymous function:We write the anonymous function in Javascript by writing function() followed by the parentheses,
+ where we may pass the parameters, and skipping the function name. Then in a pair of curly braces {}, we write our desired code.
+ Finally, we assign this function to a variable. We can later use the variable whenever we need the value of the anonymous function.*/
+let arjun=function (){//There is no name of this function,hence anonymous function
+    return 25;
+}
+
+var abhimanyu=arjun();//variableName();Can call the anonymous function through this
+console.log('value inside abhimanyu='+abhimanyu);
+
+console.log(person)
+//Reduce function: it has four argument. it does not change the original array.
+let spend=[51,20,10,90,15]
+
+let reducer=spend.reduce(callbk);//we may pass initial value here (callbk,initialValue). in this case the callbk function will start its execution from the first element 
+
+console.log(reducer)
+
+function callbk(accumulator,current){
+//callback - The function to execute on each array element (except the first element if no initialValue is provided). It takes in :- accumulator - It accumulates the callback's return values.
+//currentValue - The current element being passed from the array.
+//console.log(accumulator,current);// output :51, 20, since we have not provided initial value , hence first element(51) will become accumulator and for first element i.e 51 callback function won't execute,
+//From second element callback function will execute and 20 will be current element and 51 as a accumulator will get printed.
+//for every coming current element accumulator keeps on updating by accumulating the current value
+
+return accumulator+current;
+}
+
+let expenses=[1300,2000,1000,450,200,10000,500,15000]
+//Reduce link:https://www.programiz.com/javascript/library/array/reduce
+//Reduce function for substraction
+let remaining=expenses.reduce((accumulator,current)=> accumulator-current, 75000)//If the arrow function has only one statement, and the statement returns a value, you can remove the brackets and the return keyword:
+console.log(remaining)
+//for product:accumulator*current
+
+//Average:
+let income=[10,2,80,15,6]
+let average=income.reduce(callback,0)/income.length// total is returned by callback function ,then divide by array length to get average
+
+console.log(average)
+
+function callback(accumulator,current,ind){
+      
+          return accumulator+current;//one by one each elements will keep on adding and at last return the addition of all elements.
+
+       
+      }
+    </script>
+</body>
+</html>
+
+
